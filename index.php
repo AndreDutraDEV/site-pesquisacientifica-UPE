@@ -1,3 +1,11 @@
+<?php
+
+require 'config/cAjax.php';
+$all_data = cAjax::getDadosFromTables('articles');
+$all_data_category = cAjax::getDadosFromTables('category');
+
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

@@ -1,3 +1,13 @@
+<?php
+
+require 'config/cAjax.php';
+
+
+$id = $_GET['id'];
+if ($id){
+    $get_article = cAjax::getDadosFromTablesParametro('articles', 'id', $id);
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
