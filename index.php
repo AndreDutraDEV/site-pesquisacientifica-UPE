@@ -51,9 +51,16 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                 <div class="form_group">
                                     <label for="categ_filter">Categoria:</label>
                                     <select type="date" name="categ_filter" id="categ_filter" class="form_input">
-                                        <option value="teste">Teste 1</option>
+                                        <?php
+                                            if(count($all_data_category)> 0){
+                                                foreach ($all_data_category as $key => $value) {
+                                                    echo '<option value="'.$value['id'].'">"'.$value['nome'].'"</option>';
+                                                }
+                                            }
+                                        ?>
+                                        <!-- <option value="teste">Teste 1</option>
                                         <option value="teste">Teste 2</option>
-                                        <option value="teste">Teste 3</option>
+                                        <option value="teste">Teste 3</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -88,24 +95,29 @@ $all_data_category = cAjax::getDadosFromTables('category');
                         src="assets/icons/chevron-forward.svg" alt=""></button>
 
                 <div class="carousel_items">
-
+                    <?php
+                        if(count($all_data)> 0){
+                            foreach ($all_data as $key => $value) {
+                          
+                    ?>
                     <div class="list_items">
                         <div class="item_showcase">
                             <div class="img_content_item_list">
                                 <img src="assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
                             </div>
                             <div class="body_content_item_list">
-                                <h4 class="title_item_list">Titulo fictício aqui</h4>
-                                <p class="min_description_item_list"><span class="detail_text">Decrição: </span>Lorem
-                                    ipsum dolor sit amet consectetur adipisicing
-                                    elit. Minus ipsam, ipsum recusandae unde vitae doloremque, temporibus debitis magnam
-                                    molestias voluptas beatae explicabo commodi neque quidem velit amet sit porro
-                                    facere.</p>
-                                <button class="view_item_btn">Ver Artigo</button>
+                                <h4 class="title_item_list"><?php echo $value['title'] ?></h4>
+                                <p class="min_description_item_list"><span class="detail_text">Decrição: </span><?php echo $value['description'] ?></p>
+                                <button class="view_item_btn"><a href="pages/viewArticle.php?id=<?php echo $value['id'] ?>">Ver Artigo</a></button>
                             </div>
                         </div>
 
                     </div>
+                    <?php
+                      }
+                    }else{
+                        echo 'Nennhum valor encontrado!';
+                    }?>
                 </div>
             </div>
 
