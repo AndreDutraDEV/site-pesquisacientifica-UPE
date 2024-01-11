@@ -1,12 +1,39 @@
 <?php
 
-require 'config/cAjax.php';
-
+require '../config/cAjax.php';
 
 $id = $_GET['id'];
-if ($id){
-    $get_article = cAjax::getDadosFromTablesParametro('articles', 'id', $id);
+if ($id) {
+    $get_article = cAjax::getDadosFromTablesParametro('articles', 'article_id', $id);
 }
+
+$nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $get_article[0]['category_id'])[0]["name"];
+
+
+function base64ParaUrlImg($base64_string) {
+    $info = getimagesizefromstring(base64_decode($base64_string));
+    $mime_type = $info['mime'];
+
+    $base64_com_extensao = "data:{$mime_type};base64,{$base64_string}";
+
+    return $base64_com_extensao;
+}
+
+$image_article = base64ParaUrlImg($get_article[0]["img_preview"]);
+
+function base64ParaUrlPdf($base64_string, $filename = "documento.pdf") {
+
+    $mime_type = 'application/pdf';
+
+    $base64_com_extensao = "data:{$mime_type};base64," . $base64_string;
+
+    // $download_link = "<a href=\"$base64_com_extensao\" download=\"$filename\">Download do PDF</a>";
+
+    return $base64_com_extensao;
+}
+
+$pdf_article = base64ParaUrlPdf($get_article[0]["pdf"]);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,18 +61,19 @@ if ($id){
             <h3>Visualizando Artigo</h3>
             <div class="view_article">
                 <div class="cover_article">
-                    <img src="../assets/images/testeimg.png" alt="" class="img_cover">
+                    <img src="<?php echo $image_article;?>" alt="" class="img_cover">
                 </div>
                 <div class="description_article_info">
-                    <h4><span class="detail_text">Título: </span>Exemplo de texto teste.</h4>
-                    <h4><span class="detail_text">Autores: </span>Exemplo de texto teste.</h4>
-                    <h4><span class="detail_text">Categoria: </span>Exemplo de texto teste.</h4>
-                    <h4><span class="detail_text">Data de postagem: </span>Exemplo de texto teste.</h4>
+
+                    <h4><span class="detail_text">Título: </span><?php echo $get_article[0]["title"] ?></h4>
+                    <h4><span class="detail_text">Autores: </span><?php echo implode(', ', json_decode($get_article[0]["autors"], true)) ?></h4>
+                    <h4><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
+                    <h4><span class="detail_text">Data de postagem: </span><?php echo date("d/m/Y", strtotime($get_article[0]["date_post"])); ?></h4>
                     <div class="text_description">
                         <h4><span class="detail_text">Descrição: </span></h4>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore optio architecto quos reprehenderit id distinctio sit, delectus enim sunt totam quidem doloremque eos perferendis ipsum aliquam ducimus sapiente eaque soluta!</p>
+                        <p><?php echo $get_article[0]["resume"] ?></p>
                     </div>
-                    <button class="view_item_btn"><a href="">Abrir Artigo</a></button>
+                    <a href="<?php echo $pdf_article?>"><button class="view_item_btn">Abrir Artigo</button></a>
                 </div>
             </div>
         </section>

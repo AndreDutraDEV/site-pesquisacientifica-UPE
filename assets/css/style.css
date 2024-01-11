@@ -330,9 +330,7 @@ nav {
 
 .list_items {
     width: 100%;
-    /* margin-left: 350px; */
     display: flex;
-    align-items: center;
     gap: 1.5rem;
     transform: translateX(0px);
     transition: 0.4s;
@@ -346,7 +344,7 @@ nav {
 
 .item_showcase {
     width: 100%;
-    /* max-width: 300px; */
+    height: 100%;
     min-width: 280px;
     max-width: 320px;
     padding: 0.8rem;

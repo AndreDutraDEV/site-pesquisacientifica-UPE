@@ -3,8 +3,6 @@
 require 'config/cAjax.php';
 $all_data = cAjax::getDadosFromTables('articles');
 $all_data_category = cAjax::getDadosFromTables('category');
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -52,11 +50,11 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                     <label for="categ_filter">Categoria:</label>
                                     <select type="date" name="categ_filter" id="categ_filter" class="form_input">
                                         <?php
-                                            if(count($all_data_category)> 0){
-                                                foreach ($all_data_category as $key => $value) {
-                                                    echo '<option value="'.$value['id'].'">"'.$value['nome'].'"</option>';
-                                                }
+                                        if (count($all_data_category) > 0) {
+                                            foreach ($all_data_category as $key => $value) {
+                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
                                             }
+                                        }
                                         ?>
                                         <!-- <option value="teste">Teste 1</option>
                                         <option value="teste">Teste 2</option>
@@ -70,10 +68,8 @@ $all_data_category = cAjax::getDadosFromTables('category');
                         <div class="search_main form_group">
                             <label for="search_bar_main">Faça sua busca aqui:</label>
                             <div class="search_bar">
-                                <input type="text" class="form_input" id="search_bar_main" name="search_bar_main"
-                                    placeholder="Digite a busca...">
-                                <button type="submit" class="search_button_bar"><img src="assets/icons/search-sharp.svg"
-                                        alt="Buscar"></button>
+                                <input type="text" class="form_input" id="search_bar_main" name="search_bar_main" placeholder="Digite a busca...">
+                                <button type="submit" class="search_button_bar"><img src="assets/icons/search-sharp.svg" alt="Buscar"></button>
                             </div>
                         </div>
                     </form>
@@ -89,35 +85,32 @@ $all_data_category = cAjax::getDadosFromTables('category');
                     <h3>Recentemente adicionados:</h3>
                 </div>
 
-                <button class="navigation_carrousel_btn left_btn" onclick="slideCarousel('showcase-1', 'l')"><img
-                        src="assets/icons/chevron-back.svg" alt=""></button>
-                <button class="navigation_carrousel_btn right_btn" onclick="slideCarousel('showcase-1', 'r')"><img
-                        src="assets/icons/chevron-forward.svg" alt=""></button>
+                <button class="navigation_carrousel_btn left_btn" onclick="slideCarousel('showcase-1', 'l')"><img src="assets/icons/chevron-back.svg" alt=""></button>
+                <button class="navigation_carrousel_btn right_btn" onclick="slideCarousel('showcase-1', 'r')"><img src="assets/icons/chevron-forward.svg" alt=""></button>
 
                 <div class="carousel_items">
-                    <?php
-                        if(count($all_data)> 0){
-                            foreach ($all_data as $key => $value) {
-                          
-                    ?>
                     <div class="list_items">
-                        <div class="item_showcase">
-                            <div class="img_content_item_list">
-                                <img src="assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
-                            </div>
-                            <div class="body_content_item_list">
-                                <h4 class="title_item_list"><?php echo $value['title'] ?></h4>
-                                <p class="min_description_item_list"><span class="detail_text">Decrição: </span><?php echo $value['description'] ?></p>
-                                <button class="view_item_btn"><a href="pages/viewArticle.php?id=<?php echo $value['id'] ?>">Ver Artigo</a></button>
-                            </div>
-                        </div>
+                        <?php
+                        if (count($all_data) > 0) {
+                            foreach ($all_data as $data_article) {
+                        ?>
+                                <div class="item_showcase">
+                                    <div class="img_content_item_list">
+                                        <img src="assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
+                                    </div>
+                                    <div class="body_content_item_list">
+                                        <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
+                                        <p class="min_description_item_list"><span class="detail_text">Decrição: </span><?php echo $data_article['resume'] ?></p>
+                                        <button class="view_item_btn"><a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>">Ver Artigo</a></button>
+                                    </div>
+                                </div>
 
+                        <?php
+                            }
+                        } else {
+                            echo 'Nennhum valor encontrado!';
+                        } ?>
                     </div>
-                    <?php
-                      }
-                    }else{
-                        echo 'Nennhum valor encontrado!';
-                    }?>
                 </div>
             </div>
 
