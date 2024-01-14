@@ -39,9 +39,8 @@ CREATE TABLE `tab_log_tentativa` (
 -- Extraindo dados da tabela `tab_log_tentativa`
 --
 
-INSERT INTO `tab_log_tentativa` (`id`, `ip`, `email`, `origem`, `bloqueado`, `data_hora`) VALUES
-(66, '::1', 'leozimcelo007@gmail.com', 'http://localhost/project-backend/login.php', 'NAO', '2022-05-06 15:04:54'),
-(67, '::1', 'admin@admin.com', 'http://localhost/project-backend/login.php', 'NAO', '2022-05-06 15:20:00');
+-- INSERT INTO `tab_log_tentativa` (`id`, `ip`, `email`, `origem`, `bloqueado`, `data_hora`) VALUES
+-- (67, '::1', 'admin@admin.com', 'http://localhost/site-pesquisacientifica-UPE/login.php', 'NAO', '2022-05-06 15:20:00');
 
 -- --------------------------------------------------------
 
@@ -56,9 +55,9 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Extraindo dados da tabela `users`
-INSERT INTO `users` (`user_id`, `user_firstname`, `user_email`, `user_password`, `user_token`, `user_level`) VALUES
-(1, 'Jeferson', 'admin@admin.com', '$2y$10$b1tfQvUCDAri4AVFKSSr.eJy4hJEi1FKWKW0XYvph8vTKtimc38cm', 1234567890, '10'),
-(13, 'elksandro', 'elk@gmail.com', '$2y$10$b1tfQvUCDAri4AVFKSSr.eJy4hJEi1FKWKW0XYvph8vTKtimc38cm', 1212121212, '8');
+-- INSERT INTO `users` (`user_id`, `user_firstname`, `user_email`, `user_password`, `user_token`, `user_level`) VALUES
+-- (1, 'Jeferson', 'admin@admin.com', '$2y$10$b1tfQvUCDAri4AVFKSSr.eJy4hJEi1FKWKW0XYvph8vTKtimc38cm', 1234567890, '10'),
+-- (13, 'elksandro', 'elk@gmail.com', '$2y$10$b1tfQvUCDAri4AVFKSSr.eJy4hJEi1FKWKW0XYvph8vTKtimc38cm', 1212121212, '8');
 
 -- -------------------------------------------------------
 

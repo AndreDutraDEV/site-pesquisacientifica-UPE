@@ -30,7 +30,7 @@ function slideCarousel(carouselId, direction) {
                     listerItems.style.transform = `translateX(${newTransform}px)`;
                 } else if (direction === "r" && translate > (widthList * -1)) {
                     console.log("largura", listerItems.offsetWidth);
-                    const newTransform = Math.max(translate - passerSlide, widthList * -1 / 2);
+                    const newTransform = Math.max(translate - passerSlide, widthList * -1 / 3);
                     listerItems.style.transform = `translateX(${newTransform}px)`;
                 }
             }

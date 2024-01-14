@@ -10,7 +10,8 @@ if ($id) {
 $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $get_article[0]['category_id'])[0]["name"];
 
 
-function base64ParaUrlImg($base64_string) {
+function base64ParaUrlImg($base64_string)
+{
     $info = getimagesizefromstring(base64_decode($base64_string));
     $mime_type = $info['mime'];
 
@@ -19,20 +20,9 @@ function base64ParaUrlImg($base64_string) {
     return $base64_com_extensao;
 }
 
-$image_article = base64ParaUrlImg($get_article[0]["img_preview"]);
+$image_article = ""; //base64ParaUrlImg(base64ParaUrlPdf($get_article[0]["img_preview"]));
 
-function base64ParaUrlPdf($base64_string, $filename = "documento.pdf") {
-
-    $mime_type = 'application/pdf';
-
-    $base64_com_extensao = "data:{$mime_type};base64," . $base64_string;
-
-    // $download_link = "<a href=\"$base64_com_extensao\" download=\"$filename\">Download do PDF</a>";
-
-    return $base64_com_extensao;
-}
-
-$pdf_article = base64ParaUrlPdf($get_article[0]["pdf"]);
+$pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["pdf"]);
 
 ?>
 <!DOCTYPE html>
@@ -61,7 +51,8 @@ $pdf_article = base64ParaUrlPdf($get_article[0]["pdf"]);
             <h3>Visualizando Artigo</h3>
             <div class="view_article">
                 <div class="cover_article">
-                    <img src="<?php echo $image_article;?>" alt="" class="img_cover">
+                    <!-- <img src="<?php //echo $image_article; ?>" alt="" class="img_cover"> -->
+                    <embed src="<?php echo $pdf_article; ?>" type="application/pdf" width="100%" height="650px">
                 </div>
                 <div class="description_article_info">
 
@@ -73,18 +64,23 @@ $pdf_article = base64ParaUrlPdf($get_article[0]["pdf"]);
                         <h4><span class="detail_text">Descrição: </span></h4>
                         <p><?php echo $get_article[0]["resume"] ?></p>
                     </div>
-                    <a href="<?php echo $pdf_article?>"><button class="view_item_btn">Abrir Artigo</button></a>
+                    <!-- <a href="#" onclick="openPDF('<?php //echo $pdf_article; ?>');"><button class="view_item_btn">Abrir Artigo</button></a> -->
+                    <a href="<?php echo $pdf_article; ?>" download="artigo.pdf"><button class="view_item_btn">Baixar Artigo</button></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Select2 JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="../assets/js/main.js"></script>
 
+    <script>
+        function openPDF(pdfUrl) {
+            window.open(pdfUrl, '_blank');
+            setTimeout(function() {
+                location.reload();
+            }, 1000);
+        }
+    </script>
 </body>
 
 </html>

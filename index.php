@@ -28,8 +28,8 @@ $all_data_category = cAjax::getDadosFromTables('category');
     <main>
         <section class="hero_section">
             <div class="hero_banner">
-                <img src="assets/images/capaUPESuru.png" alt="image_UPE" class="back_title_logo">
-                <h1>Busca Científica <i>Campus</i> Surubim</h1>
+                <h1>Busca de Artigos Científicos</h1>
+                <img src="assets/images/bgUpeSurubimColor.png" alt="image_UPE" class="back_title_logo">
             </div>
             <div class="search_panel">
                 <h3>Painel de Buscas</h3>
@@ -56,9 +56,6 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                             }
                                         }
                                         ?>
-                                        <!-- <option value="teste">Teste 1</option>
-                                        <option value="teste">Teste 2</option>
-                                        <option value="teste">Teste 3</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -85,14 +82,16 @@ $all_data_category = cAjax::getDadosFromTables('category');
                     <h3>Recentemente adicionados:</h3>
                 </div>
 
-                <button class="navigation_carrousel_btn left_btn" onclick="slideCarousel('showcase-1', 'l')"><img src="assets/icons/chevron-back.svg" alt=""></button>
-                <button class="navigation_carrousel_btn right_btn" onclick="slideCarousel('showcase-1', 'r')"><img src="assets/icons/chevron-forward.svg" alt=""></button>
-
+                
                 <div class="carousel_items">
+                    <button class="navigation_carrousel_btn left_btn" onclick="slideCarousel('showcase-1', 'l')"><img src="assets/icons/chevron-back.svg" alt=""></button>
+                    <button class="navigation_carrousel_btn right_btn" onclick="slideCarousel('showcase-1', 'r')"><img src="assets/icons/chevron-forward.svg" alt=""></button>
                     <div class="list_items">
                         <?php
                         if (count($all_data) > 0) {
                             foreach ($all_data as $data_article) {
+                                $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $data_article['category_id'])[0]["name"];
+
                         ?>
                                 <div class="item_showcase">
                                     <div class="img_content_item_list">
@@ -100,8 +99,9 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                     </div>
                                     <div class="body_content_item_list">
                                         <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
-                                        <p class="min_description_item_list"><span class="detail_text">Decrição: </span><?php echo $data_article['resume'] ?></p>
-                                        <button class="view_item_btn"><a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>">Ver Artigo</a></button>
+                                        <p><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
+                                        <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php echo $data_article['resume'] ?></p>
+                                        <a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="view_item_btn">Ver Artigo</button></a>
                                     </div>
                                 </div>
 
