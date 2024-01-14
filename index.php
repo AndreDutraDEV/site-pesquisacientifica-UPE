@@ -34,7 +34,7 @@ $all_data_category = cAjax::getDadosFromTables('category');
             <div class="search_panel">
                 <h3>Painel de Buscas</h3>
                 <div class="search_builder_area">
-                    <form action="" class="search_form">
+                    <form action="pages/search.php" class="search_form" method="POST">
 
                         <div class="search_filters">
 

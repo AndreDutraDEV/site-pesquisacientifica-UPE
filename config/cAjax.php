@@ -59,12 +59,33 @@ abstract class cAjax
             throw $th;
         }
     }
+
+    static function getSearch($tableName, $parametro, $value){
+        try {
+            $pdo = Conn::conectar();
+
+            // Assuming the parameter corresponds to the field name
+            // Use LIKE for a partial match on the title field
+            $sql = "SELECT * FROM $tableName WHERE $parametro LIKE :value";
+
+            $stm = $pdo->prepare($sql);
+            // Binding the parameter value with wildcard characters for a LIKE search
+            $stm->bindValue(':value', "%$value%");
+            $stm->execute();
+            $getAll = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            return $getAll;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
     static function getDadosFromTables($tableName)
     {
         try {
             $pdo = Conn::conectar();
             // Assuming the parameter corresponds to the field name
-            $sql = "SELECT * FROM $tableName"; 
+            $sql = "SELECT * FROM $tableName";
             $stm = $pdo->prepare($sql);
             $stm->execute();
             $getAll = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -106,33 +127,33 @@ abstract class cAjax
             throw $th;
         }
     }
-    static function updateDadosFromTable($data, $tableName, $recordId )
+    static function updateDadosFromTable($data, $tableName, $recordId)
     {
         try {
             $pdo = Conn::conectar();
             $pdo->beginTransaction();
-    
+
             // Verifica se o campo 'password' está presente no array $data
             if (isset($data['password']) && !empty($data['password'])) {
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             }
-    
+
             $setColumns = [];
             foreach ($data as $key => $value) {
                 $setColumns[] = "$key = :$key";
             }
             $setClause = implode(', ', $setColumns);
-    
+
             $query = "UPDATE $tableName SET $setClause WHERE id = :id";
             $statement = $pdo->prepare($query);
-    
+
             foreach ($data as $key => $value) {
                 $statement->bindValue(":$key", $value);
             }
             $statement->bindValue(":id", $recordId);
-    
+
             $res = $statement->execute();
-    
+
             $pdo->commit();
             return [
                 "status" => 'success',
