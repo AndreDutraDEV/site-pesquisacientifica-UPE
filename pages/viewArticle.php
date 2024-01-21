@@ -2,7 +2,7 @@
 
 require '../config/cAjax.php';
 
-$id = $_GET['id'];
+$id = @$_GET['id'];
 if ($id) {
     $get_article = cAjax::getDadosFromTablesParametro('articles', 'article_id', $id);
 }
@@ -61,11 +61,10 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
                     <h4><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
                     <h4><span class="detail_text">Data de postagem: </span><?php echo date("d/m/Y", strtotime($get_article[0]["date_post"])); ?></h4>
                     <div class="text_description">
-                        <h4><span class="detail_text">Descrição: </span></h4>
+                        <h4><span class="detail_text">Resumo: </span></h4>
                         <p><?php echo $get_article[0]["resume"] ?></p>
                     </div>
-                    <!-- <a href="#" onclick="openPDF('<?php //echo $pdf_article; ?>');"><button class="view_item_btn">Abrir Artigo</button></a> -->
-                    <a href="<?php echo $pdf_article; ?>" download="artigo.pdf"><button class="view_item_btn">Baixar Artigo</button></a>
+                    <a href="<?php echo $pdf_article; ?>" download="artigo.pdf"><button class="btn_primary">Baixar Artigo</button></a>
                 </div>
             </div>
         </section>

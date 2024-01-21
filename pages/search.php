@@ -8,6 +8,8 @@ $textSearch = ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search_bar_
 
 $responseSearch = cAjax::getSearch('articles', 'title', $textSearch);
 
+$textSearch = @$_POST['search_bar_main'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -66,7 +68,7 @@ $responseSearch = cAjax::getSearch('articles', 'title', $textSearch);
                         <div class="search_main form_group">
                             <label for="search_bar_main">Faça sua busca aqui:</label>
                             <div class="search_bar">
-                                <input type="text" class="form_input" id="search_bar_main" name="search_bar_main" placeholder="Digite a busca...">
+                                <input type="text" class="form_input" id="search_bar_main" name="search_bar_main" placeholder="Digite a busca..." value="<?php echo $textSearch; ?>">
                                 <button type="submit" class="search_button_bar"><img src="../assets/icons/search-sharp.svg" alt="Buscar"></button>
                             </div>
                         </div>
@@ -102,7 +104,7 @@ $responseSearch = cAjax::getSearch('articles', 'title', $textSearch);
                                         <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
                                         <p><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
                                         <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php echo $data_article['resume'] ?></p>
-                                        <a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="view_item_btn">Ver Artigo</button></a>
+                                        <a href="/site-pesquisacientifica-UPE/pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="btn_primary">Ver Artigo</button></a>
                                     </div>
                                 </div>
 

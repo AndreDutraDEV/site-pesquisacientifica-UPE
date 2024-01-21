@@ -48,7 +48,8 @@ $all_data_category = cAjax::getDadosFromTables('category');
 
                                 <div class="form_group">
                                     <label for="categ_filter">Categoria:</label>
-                                    <select type="date" name="categ_filter" id="categ_filter" class="form_input">
+                                    <select name="categ_filter" id="categ_filter" class="form_input">
+                                        <option value="1">Todas</option>
                                         <?php
                                         if (count($all_data_category) > 0) {
                                             foreach ($all_data_category as $key => $value) {
@@ -101,7 +102,7 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                         <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
                                         <p><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
                                         <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php echo $data_article['resume'] ?></p>
-                                        <a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="view_item_btn">Ver Artigo</button></a>
+                                        <a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="btn_primary">Ver Artigo</button></a>
                                     </div>
                                 </div>
 
