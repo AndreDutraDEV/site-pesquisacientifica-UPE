@@ -9,7 +9,7 @@ abstract class Conn
 {
     //    // LOCAL
     const host = 'localhost';
-    const dbname = 'upe_articles_database';
+    const dbname = 'upe_article_database';
     const user = 'root';
     const password = '';
 

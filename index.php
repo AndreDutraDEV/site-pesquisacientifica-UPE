@@ -20,6 +20,7 @@ $all_data_category = cAjax::getDadosFromTables('category');
         <img src="assets/images/logoUpeSemBack.png" alt="header_logo" class="logo-min">
         <nav>
             <ul class="nav_menu">
+                <li><a href="" class="link_nav_menu active_link">Home</a></li>
                 <li><a href="" class="link_nav_menu">Quem Somos?</a></li>
                 <li><a href="" class="link_nav_menu">Fale Conosco</a></li>
             </ul>
@@ -99,9 +100,11 @@ $all_data_category = cAjax::getDadosFromTables('category');
                                         <img src="assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
                                     </div>
                                     <div class="body_content_item_list">
-                                        <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
-                                        <p><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
-                                        <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php echo $data_article['resume'] ?></p>
+                                        <div class="info_article">
+                                            <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
+                                            <p><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
+                                            <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php echo $data_article['resume'] ?></p>
+                                        </div>
                                         <a href="pages/viewArticle.php?id=<?php echo $data_article['article_id'] ?>"><button class="btn_primary">Ver Artigo</button></a>
                                     </div>
                                 </div>
@@ -109,7 +112,7 @@ $all_data_category = cAjax::getDadosFromTables('category');
                         <?php
                             }
                         } else {
-                            echo 'Nennhum valor encontrado!';
+                            echo '<h2>Nennhum valor encontrado!</h2>';
                         } ?>
                     </div>
                 </div>

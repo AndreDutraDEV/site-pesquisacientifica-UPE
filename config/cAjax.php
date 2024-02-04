@@ -12,9 +12,9 @@ abstract class cAjax
             $pdo->beginTransaction();
 
             // Verifica se o campo 'password' está presente no array $data
-            if (isset($data['password']) && !empty($data['password'])) {
-                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-            }
+            // if (isset($data['password']) && !empty($data['password'])) {
+            //     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            // }
 
             $columns = implode(', ', array_keys($data));
             $values = ':' . implode(', :', array_keys($data));

@@ -55,9 +55,8 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
                     <embed src="<?php echo $pdf_article; ?>" type="application/pdf" width="100%" height="650px">
                 </div>
                 <div class="description_article_info">
-
                     <h4><span class="detail_text">Título: </span><?php echo $get_article[0]["title"] ?></h4>
-                    <h4><span class="detail_text">Autores: </span><?php echo implode(', ', json_decode($get_article[0]["autors"], true)) ?></h4>
+                    <h4><span class="detail_text">Autores: </span><?php if (strpos(json_decode($get_article[0]["autors"], true), ",") !== false){ echo implode(', ', json_decode($get_article[0]["autors"], true));} else {echo $get_article[0]["autors"];} ?></h4>
                     <h4><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
                     <h4><span class="detail_text">Data de postagem: </span><?php echo date("d/m/Y", strtotime($get_article[0]["date_post"])); ?></h4>
                     <div class="text_description">

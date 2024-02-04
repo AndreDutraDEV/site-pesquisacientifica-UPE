@@ -111,7 +111,7 @@ $textSearch = @$_POST['search_bar_main'];
                         <?php
                             }
                         } else {
-                            echo 'Nennhum valor encontrado!';
+                            echo '<h2 style="color: #fff" >Nennhum artigo encontrado!</h2>';
                         } ?>
                     </div>
                 </div>
