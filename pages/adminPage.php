@@ -1,6 +1,23 @@
 <?php
 
+require_once '../config/cGeral.php';
 require '../config/cAjax.php';
+
+if (
+    !$_SESSION['user_level'] ||
+    !$_SESSION['user_email'] ||
+    !$_SESSION['logged'] ||
+    !$_SESSION['user_token'] ||
+    (!$_SESSION['user_id'] && $_SESSION['blocked'] == 1)
+) {
+    session_destroy();
+    unset($_SESSION['user_level']);
+    unset($_SESSION['user_email']);
+    unset($_SESSION['user_id']);
+    unset($_SESSION['user_token']);
+    unset($_SESSION['logged']);
+    header('Location: login.php');
+}
 
 $all_data_category = cAjax::getDadosFromTables('category');
 
@@ -16,22 +33,25 @@ function base64ParaUrlImg($base64_string)
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+
         $pdf_file = $_FILES['file_pdf'];
         $img_file = $_FILES['file_image'];
-        
-        $pdf_file_content = file_get_contents($pdf_file['tmp_name']);
-        $img_file_content = file_get_contents($img_file['tmp_name']);
-        
-        // Prepare data for insertion
-        $data = [
-            'title' => $_POST['article_title_reg'],
-            'resume' => $_POST['resume_article_reg'],
-            'autors' => $_POST['authors_article_reg'],
-            'pdf' => $pdf_file_content,
-            'img_preview' => $img_file_content,
-            'date_post' => "2024-01-14 15:57:33",
-            'category_id' => 103,
-        ];        
+        $img_file_group = $_FILES['file_image_group'];
+
+        $data = array();
+
+        $data["title"] = isset($_POST['article_title_reg']) ? $_POST['article_title_reg'] : null;
+        $data["resume"] = isset($_POST['resume_article_reg']) ? $_POST['resume_article_reg'] : null;
+        $data["authors"] = isset($_POST['authors_article_reg']) ? $_POST['authors_article_reg'] : null;
+        $data["category_id"] = isset($_POST['categ_article_reg']) ? $_POST['categ_article_reg'] : null;
+
+        // Verifica se os arquivos foram enviados e se têm conteúdo
+        $data["pdf"] = is_uploaded_file($pdf_file['tmp_name']) ? file_get_contents($pdf_file['tmp_name']) : null;
+        $data["img_preview"] = is_uploaded_file($img_file['tmp_name']) ? file_get_contents($img_file['tmp_name']) : null;
+        $data["authors_img"] = is_uploaded_file($img_file_group['tmp_name']) ? file_get_contents($img_file_group['tmp_name']) : null;
+
+        // Obtém a data atual no formato desejado
+        $data["date_post"] = date("Y-m-d H:i:s");
 
         $tableName = 'articles';
 
@@ -59,16 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
 
     <body>
-        <header>
-            <img src="../assets/images/logoUpeSemBack.png" alt="header_logo" class="logo-min">
-            <nav>
-                <ul class="nav_menu">
-                    <li><a href="../index.php" class="link_nav_menu">Home</a></li>
-                    <li><a href="" class="link_nav_menu">Quem Somos?</a></li>
-                    <li><a href="" class="link_nav_menu">Fale Conosco</a></li>
-                </ul>
-            </nav>
-        </header>
+        <?php
+        include('../includes/header.php');
+        ?>
         <main>
             <section class="register_article_section">
                 <h3>Adicionando Novo Artigo</h3>
@@ -89,10 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form_group categ">
                             <label for="categ_article_reg">Selecione a categoria que mais se encaixa com o artigo:</label>
                             <select name="categ_article_reg" id="categ_article_reg" class="form_input" required>
-                                <option value="1">Nenhuma</option>
-                                <?php foreach ($all_data_category as $category) : ?>
-                                    <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
-                                <?php endforeach; ?>
+                                <option value="">Nenhuma</option>
+                                <?php
+                                foreach ($all_data_category as $category) {
+                                    echo "<option value='" . $category['category_id'] . "'>" . $category['name'] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form_group file">
@@ -100,8 +115,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="file" name="file_pdf" id="file_pdf" class="input_file_article_reg" accept=".pdf" required>
                         </div>
                         <div class="form_group file2">
-                            <label for="file_image">Selecione a imagem do grupo:</label>
+                            <label for="file_image">Selecione a imagem de capa:</label>
                             <input type="file" name="file_image" id="file_image" class="input_file_article_reg" accept=".jpg, .png, .jpeg" required>
+                        </div>
+                        <div class="form_group file3">
+                            <label for="file_image_group">Selecione a imagem do grupo:</label>
+                            <input type="file" name="file_image_group" id="file_image_group" class="input_file_article_reg" accept=".jpg, .png, .jpeg" required>
                         </div>
                         <button class="btn_primary btn">Cadastrar Artigo</button>
                     </form>
@@ -133,32 +152,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     });
                 });
             });
-
-
-            // $(document).ready(function() {
-            //     // Intercepta o envio do formulário
-            //     $("#insertArticleForm").submit(function(event) {
-            //         event.preventDefault();
-
-            //         var formData = $(this).serialize();
-
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "adminPage.php",
-            //             data: formData,
-            //             success: function(response) {
-            //                 console.log(response);
-            //             },
-            //             error: function(error) {
-            //                 console.error("Erro na requisição AJAX: " + error.statusText);
-            //             }
-            //         });
-            //     });
-            // });
         </script>
     </body>
-
     </html>
-<?php
+    <?php
+    $action = strip_tags(
+        filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRIPPED)
+    );
+    if ($action == 'logout') {
+        logout();
+    }
 }
 ?>

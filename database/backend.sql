@@ -73,7 +73,7 @@ CREATE TABLE `articles` (
   `article_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `resume` TEXT NOT NULL,
-  `autors` varchar(500) NOT NULL,
+  `authors` varchar(500) NOT NULL,
   `pdf` TEXT NOT NULL,
   `date_post` DATETIME NOT NULL,
   `img_preview` TEXT NOT NULL,

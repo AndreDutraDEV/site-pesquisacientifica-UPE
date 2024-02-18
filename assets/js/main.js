@@ -1,6 +1,7 @@
-const passerSlide = 350;
 
 function slideCarousel(carouselId, direction) {
+    let passerSlide = 350;
+    
     const carouselElement = document.querySelector(`#${carouselId}`);
 
     if (carouselElement) {
@@ -30,7 +31,7 @@ function slideCarousel(carouselId, direction) {
                     listerItems.style.transform = `translateX(${newTransform}px)`;
                 } else if (direction === "r" && translate > (widthList * -1)) {
                     console.log("largura", listerItems.offsetWidth);
-                    const newTransform = Math.max(translate - passerSlide, widthList * -1 / 3);
+                    const newTransform = Math.max(translate - passerSlide, widthList * -1);
                     listerItems.style.transform = `translateX(${newTransform}px)`;
                 }
             }

@@ -325,10 +325,9 @@ nav {
 .search_main {
     height: 100%;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     width: 100%;
-    flex: 1 1;
+    flex: 1 1 200px;
 }
 
 /* Vitrines */
@@ -443,6 +442,22 @@ nav {
     font-weight: 600;
 }
 
+.btn_secondary {
+    width: 100%;
+    max-width: 320px;
+    min-height: 36px;
+    padding: 0 1.5rem;
+    border-radius: var(--radius-2);
+    background-color: #fcfcfc;
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn_secondary a {
+    font-size: 18px;
+    font-weight: 600;
+} 
+
 /* Visualização dos artigos */
 .view_article_section {
     width: 100%;
@@ -491,6 +506,22 @@ nav {
     border-radius: var(--radius-2);
 }
 
+.img_group_box {
+    margin-top: 2rem;
+    border-radius: .5rem;
+    padding-right: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.view_img_group {
+    width: 100%;
+    max-width: 300px;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
 /* Pag of register new Article */
 
 .article_form_reg {
@@ -504,28 +535,34 @@ nav {
         "authors categ"
         "file file"
         "file2 file2"
+        "file3 file3"
         "vazio btn"
         ;
 }
 
 .title {
     grid-area: title;
-    grid-column: span 2; /* Ocupa as duas colunas disponíveis */
+    grid-column: span 2;
 }
 
 .resum {
     grid-area: resum;
-    grid-column: span 2; /* Ocupa as duas colunas disponíveis */
+    grid-column: span 2;
 }
 
 .file {
     grid-area: file;
-    grid-column: span 2; /* Ocupa as duas colunas disponíveis */
+    grid-column: span 2;
 }
 
 .file2 {
     grid-area: file2;
-    grid-column: span 2; /* Ocupa as duas colunas disponíveis */
+    grid-column: span 2;
+}
+
+.file3 {
+    grid-area: file3;
+    grid-column: span 2;
 }
 
 .btn {
@@ -575,4 +612,17 @@ input[type="file"].input_file_article_reg::file-selector-button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 500px) {
+    :root {
+        --border-spacing-page: 16px;
+    }
+
+    .item_showcase {
+        max-width: 265px !important;
+        width: 265px !important;
+        min-width: auto;
+        height: 350px;
+    }
 }

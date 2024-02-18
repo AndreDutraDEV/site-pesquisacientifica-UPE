@@ -1,14 +1,15 @@
 <?php
-
+require_once '../config/cGeral.php';
 require '../config/cAjax.php';
 
 $id = @$_GET['id'];
 if ($id) {
     $get_article = cAjax::getDadosFromTablesParametro('articles', 'article_id', $id);
+} else {
+    exit;
 }
 
 $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $get_article[0]['category_id'])[0]["name"];
-
 
 function base64ParaUrlImg($base64_string)
 {
@@ -20,7 +21,8 @@ function base64ParaUrlImg($base64_string)
     return $base64_com_extensao;
 }
 
-$image_article = ""; //base64ParaUrlImg(base64ParaUrlPdf($get_article[0]["img_preview"]));
+$img_group_base64 = base64_encode($get_article[0]["authors_img"]);
+$img_group_uri = "data:image/png;base64," . $img_group_base64;
 
 $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["pdf"]);
 
@@ -37,26 +39,19 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
 </head>
 
 <body>
-    <header>
-        <img src="../assets/images/logoUpeSemBack.png" alt="header_logo" class="logo-min">
-        <nav>
-            <ul class="nav_menu">
-                <li><a href="" class="link_nav_menu">Quem Somos?</a></li>
-                <li><a href="" class="link_nav_menu">Fale Conosco</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php
+    include('../includes/header.php');
+    ?>
     <main>
         <section class="view_article_section">
             <h3>Visualizando Artigo</h3>
             <div class="view_article">
                 <div class="cover_article">
-                    <!-- <img src="<?php //echo $image_article; ?>" alt="" class="img_cover"> -->
                     <embed src="<?php echo $pdf_article; ?>" type="application/pdf" width="100%" height="650px">
                 </div>
                 <div class="description_article_info">
                     <h4><span class="detail_text">Título: </span><?php echo $get_article[0]["title"] ?></h4>
-                    <h4><span class="detail_text">Autores: </span><?php if (strpos(json_decode($get_article[0]["autors"], true), ",") !== false){ echo implode(', ', json_decode($get_article[0]["autors"], true));} else {echo $get_article[0]["autors"];} ?></h4>
+                    <h4><span class="detail_text">Autores: </span><?php if (strpos(json_decode($get_article[0]["authors"], true), ",") !== false){ echo implode(', ', json_decode($get_article[0]["authors"], true));} else {echo $get_article[0]["authors"];} ?></h4>
                     <h4><span class="detail_text">Categoria: </span><?php echo $nameCategory ?></h4>
                     <h4><span class="detail_text">Data de postagem: </span><?php echo date("d/m/Y", strtotime($get_article[0]["date_post"])); ?></h4>
                     <div class="text_description">
@@ -64,6 +59,10 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
                         <p><?php echo $get_article[0]["resume"] ?></p>
                     </div>
                     <a href="<?php echo $pdf_article; ?>" download="artigo.pdf"><button class="btn_primary">Baixar Artigo</button></a>
+                    <div class="img_group_box">
+                        <h3>Grupo dos discentes:</h3>
+                        <img class="view_img_group" src="<?php echo $img_group_uri; ?>" alt="Imagem do Grupo">
+                    </div>
                 </div>
             </div>
         </section>

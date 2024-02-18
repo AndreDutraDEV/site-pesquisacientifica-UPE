@@ -17,7 +17,7 @@ define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');
 define('DB', 'backend');
-define('BASE_URL', 'http://localhost/FREELANCERS/LandingPageBackend');
+define('BASE_URL', 'http://localhost/site-pesquisacientifica-UPE/pages');
 
 //Chamada da Conexão
 require 'cCon.php';
@@ -28,7 +28,7 @@ define('LEVEL_USER', 8); //Nível de Acesso Para Usuários [Operacionais]
 define('LEVEL_SUPER', 10); //Nível de Acesso Para Profissional Web [Você]
 
 /*Configurações de Módulos*/
-define('MINUTOS_BLOQUEIO', 10); // Constante com a quantidade minutos para bloqueio
+define('MINUTOS_BLOQUEIO', 1); // Constante com a quantidade minutos para bloqueio
 define('TENTATIVAS_ACEITAS', 5); //Quantas Tentativas Usuário Pode Fazer Antes de Bloquear
 define('REMEMBER', 1); //Lembrar Senha
 define('TITLE_LOGIN', 'Login Auth 2.0'); //Nome da Aplicação
@@ -43,5 +43,5 @@ function logout(){
     unset($_SESSION['user_id']);
     unset($_SESSION['user_token']);
     unset($_SESSION['logged']);
-    header('Location:  '.BASE_URL.'/index.php');
+    header('Location:  '.BASE_URL.'/home.php');
 }
