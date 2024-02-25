@@ -88,11 +88,12 @@ $textSearch = @$_POST['search_bar_main'];
                         if (count($responseSearch) > 0) {
                             foreach ($responseSearch as $data_article) {
                                 $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $data_article['category_id'])[0]["name"];
-
-                        ?>
+                                $img_preview_base64 = base64_encode($data_article["authors_img"]);
+                                $img_preview_uri = "data:image/png;base64," . $img_preview_base64;
+                                ?>
                                 <div class="item_showcase">
                                     <div class="img_content_item_list">
-                                        <img src="../assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
+                                        <img src="<?php echo $img_preview_uri; ?>" alt="Capa do artigo" class="img_item_list">
                                     </div>
                                     <div class="body_content_item_list">
                                         <h4 class="title_item_list"><?php echo $data_article['title'] ?></h4>
@@ -110,45 +111,6 @@ $textSearch = @$_POST['search_bar_main'];
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="rolling_showcase" id="showcase-1">
-
-                <div class="headers_showcases">
-                    <h3>Recentemente adicionados:</h3>
-                </div>
-                                        
-
-                <div class="carousel_items">
-                    <button class="navigation_carrousel_btn left_btn" onclick="slideCarousel('showcase-1', 'l')"><img src="../assets/icons/chevron-back.svg" alt=""></button>
-                    <button class="navigation_carrousel_btn right_btn" onclick="slideCarousel('showcase-1', 'r')"><img src="../assets/icons/chevron-forward.svg" alt=""></button>
-                    <div class="list_items">
-                        <?php
-                        // if (count($all_data) > 0) {
-                        //     foreach ($all_data as $data_article) {
-                        //         $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $data_article['category_id'])[0]["name"];
-
-                        ?>
-                                <div class="item_showcase">
-                                    <div class="img_content_item_list">
-                                        <img src="../assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
-                                    </div>
-                                    <div class="body_content_item_list">
-                                        <h4 class="title_item_list"><?php //echo $data_article['title'] ?></h4>
-                                        <p><span class="detail_text">Categoria: </span><?php //echo $nameCategory ?></h4>
-                                        <p class="min_description_item_list"><span class="detail_text">Resumo: </span><?php // echo $data_article['resume'] ?></p>
-                                        <a href="pages/viewArticle.php?id=<?php // echo $data_article['article_id'] ?>"><button class="view_item_btn">Ver Artigo</button></a>
-                                    </div>
-                                </div>
-
-                        <?php
-                            // }
-                        // } else {
-                            // echo 'Nennhum valor encontrado!';
-                        // } ?>
-                    </div>
-                </div>
-            </div> -->
-
         </section>
     </main>
 

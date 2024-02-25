@@ -1,5 +1,5 @@
 <header>
-    <img src="assets/images/logoUpeSemBack.png" alt="header_logo" class="logo-min">
+    <img src="../assets/images/logoUpeSemBack.png" alt="header_logo" class="logo-min">
     <nav>
         <ul class="nav_menu">
             <li><a href="home.php" class="link_nav_menu">Home</a></li>

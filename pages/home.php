@@ -88,11 +88,12 @@ $all_data_category = cAjax::getDadosFromTables('category');
                         if (count($all_data) > 0) {
                             foreach ($all_data as $data_article) {
                                 $nameCategory = cAjax::getDadosFromTablesParametro('category', 'category_id', $data_article['category_id'])[0]["name"];
-
-                        ?>
+                                $img_preview_base64 = base64_encode($data_article["authors_img"]);
+                                $img_preview_uri = "data:image/png;base64," . $img_preview_base64;
+                                ?>
                                 <div class="item_showcase">
                                     <div class="img_content_item_list">
-                                        <img src="../assets/images/imagem-capa-upe.png" alt="" class="img_item_list">
+                                        <img src="<?php echo $img_preview_uri; ?>" alt="Capa do artigo" class="img_item_list">
                                     </div>
                                     <div class="body_content_item_list">
                                         <div class="info_article">
@@ -115,7 +116,30 @@ $all_data_category = cAjax::getDadosFromTables('category');
 
         </section>
     </main>
-
+    <footer>
+        <div class="colunm_footer">
+            <h4 style="color: #fcfcfc;">Contatos do criador:</h4>
+            <ul class="list_footer">
+                <li>By: André Dutra</li>
+                <li><img src="../assets/icons/linkedin.svg" alt="Linkedin"><a href="https://www.linkedin.com/in/andr%C3%A9-dutra-2a3b16225/">Linkedin</a></li>
+                <li><img src="../assets/icons/insta.svg" alt="Instagram"><a href="https://www.instagram.com/andrels_dutra/">Instagram</a></li>
+            </ul>
+        </div>
+        <div class="colunm_footer">
+            <h4 style="color: #fcfcfc;">Creditos:</h4>
+            <ul class="list_footer">
+                <li>Idealizado e orientado por: Emerson Remígio</li>
+                <li>Desenvolvido por: André Dutra</li>
+            </ul>
+        </div>
+        <div class="colunm_footer">
+            <h4 style="color: #fcfcfc;">Informações:</h4>
+            <ul class="list_footer">
+                <li>Projeto desenvolvido para a disciplina de Escrita Científica no campus UPE Surubim.</li>
+                <li><a href="about.php">Mais Sobre</a></li>
+            </ul>
+        </div>
+    </footer>
     <script src="../assets/js/main.js"></script>
 </body>
 
