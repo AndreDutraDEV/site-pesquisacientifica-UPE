@@ -6,6 +6,7 @@
             <li><a href="" class="link_nav_menu">Sobre nós</a></li>
             <?php 
             if (isset($_SESSION['logged']) && $_SESSION['logged']) {
+                echo '<li><a href="adminPage.php" class="link_nav_menu">Página ADM</a></li>';
                 echo "<li><button class='btn_secondary'><a href='?action=logout'>Sair</a></button></li>";
             } else {
                 echo "<li><button class='btn_secondary'><a href='login.php'>Entrar</a></button></li>";
