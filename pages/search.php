@@ -113,7 +113,7 @@ $textSearch = @$_POST['search_bar_main'];
             </div>
         </section>
     </main>
-
+    <?php include('../includes/footer.php') ?>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Select2 JavaScript -->

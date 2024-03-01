@@ -67,7 +67,7 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
             </div>
         </section>
     </main>
-
+    <?php include('../includes/footer.php') ?>
     <script src="../assets/js/main.js"></script>
 
     <script>

@@ -25,22 +25,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php
         include('../includes/header.php');
         ?>
-        <div class="login_box">
-            <h2>Login</h2>
-            <form id="<?php echo $pIndex; ?>Form" method="POST">
-                <div class="form_group">
-                    <label for="email">email</label>
-                    <input type="email" name="email" class="form_input" placeholder="digite seu email">
-                </div>
-                <div class="form_group">
-                    <label for="pasword">senha</label>
-                    <input type="password" name="user_senha" class="form_input" placeholder="digite sua senha">
-                </div>
-                <input type="hidden" name="user_login" value="true">
-                <button type="submit" class="btn_primary btn" id="<?php echo $pIndex; ?>Btn">Entrar</button>
-            </form>
+        <div class="continer_floating_box">
+            <div class="login_box">
+                <h2>Login</h2>
+                <form id="<?php echo $pIndex; ?>Form" method="POST">
+                    <div class="form_group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form_input" placeholder="Digite seu email">
+                    </div>
+                    <div class="form_group">
+                        <label for="pasword">Senha</label>
+                        <input type="password" name="user_senha" class="form_input" placeholder="Digite sua senha">
+                    </div>
+                    <input type="hidden" name="user_login" value="true">
+                    <button type="submit" class="btn_primary btn" id="<?php echo $pIndex; ?>Btn">Entrar</button>
+                </form>
+            </div>
         </div>
+
         <div id="<?php echo $pIndex; ?>Result"></div>
+        <?php include('../includes/footer.php') ?>
 
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -81,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             });
         </script>
     </body>
-
     </html>
 
     <?php

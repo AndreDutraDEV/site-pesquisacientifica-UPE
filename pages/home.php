@@ -116,33 +116,9 @@ $all_data_category = cAjax::getDadosFromTables('category');
 
         </section>
     </main>
-    <footer>
-        <div class="body_footer">
-            <div class="colunm_footer">
-                <h4 style="color: #fcfcfc;">Contatos do criador:</h4>
-                <ul class="list_footer">
-                    <li>By: <span class="highlight">André Dutra</span></li>
-                    <li><img src="../assets/icons/linkedin.svg" alt="Linkedin"><a href="https://www.linkedin.com/in/andr%C3%A9-dutra-2a3b16225/">Linkedin</a></li>
-                    <li><img src="../assets/icons/insta.svg" alt="Instagram"><a href="https://www.instagram.com/andrels_dutra/">Instagram</a></li>
-                </ul>
-            </div>
-            <div class="colunm_footer">
-                <h4 style="color: #fcfcfc;">Créditos:</h4>
-                <ul class="list_footer">
-                    <li>Idealizado e orientado por: <span class="highlight">Prof. Emerson Remígio</span></li>
-                    <li>Desenvolvido por: <span class="highlight">André Dutra</span></li>
-                </ul>
-            </div>
-            <div class="colunm_footer">
-                <h4 style="color: #fcfcfc;">Informações:</h4>
-                <ul class="list_footer">
-                    <li><p>Projeto desenvolvido para a disciplina de <span class="highlight">Escrita Científica</span> no campus <span class="highlight" >UPE Surubim</span> no primeiro período da primeria turma de B.S.I do campus.</p></li>
-                    <li><a href="about.php">Mais Sobre</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="end_footer">© Projeto Open Source, disponível no <span class="item_link_footer"><a href="">Github</a><img src="../assets/icons/github.svg" alt=""></span></div>
-    </footer>
+    <?php
+    include('../includes/footer.php')
+    ?>
     <script src="../assets/js/main.js"></script>
 </body>
 
