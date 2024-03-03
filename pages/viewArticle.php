@@ -60,7 +60,7 @@ $pdf_article = "data:application/pdf;base64," . base64_encode($get_article[0]["p
                     </div>
                     <a href="<?php echo $pdf_article; ?>" download="artigo.pdf"><button class="btn_primary">Baixar Artigo</button></a>
                     <div class="img_group_box">
-                        <h3>Grupo dos discentes:</h3>
+                        <h3>Grupo autor do artigo:</h3>
                         <img class="view_img_group" src="<?php echo $img_group_uri; ?>" alt="Imagem do Grupo">
                     </div>
                 </div>

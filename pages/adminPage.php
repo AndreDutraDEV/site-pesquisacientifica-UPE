@@ -3,6 +3,8 @@
 require_once '../config/cGeral.php';
 require '../config/cAjax.php';
 
+$pIndex = 'adminPage';
+
 if (
     !$_SESSION['user_level'] ||
     !$_SESSION['user_email'] ||
@@ -55,10 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $tableName = 'articles';
 
+        foreach ($data as $dataField => $value) {
+            if (!$value && $dataField != "category_id") {
+                echo 'Preencha os campos necessários!: ' . $result['response'];
+                exit;
+            }
+        }
+
         $result = cAjax::insertDadosFromTable($data, $tableName);
 
         if ($result['status'] === 'success') {
-            echo 'Inserção bem-sucedida!';
+            echo 200;
         } else {
             echo 'Erro durante a inserção: ' . $result['response'];
         }
@@ -74,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home | Pesquisa de Artigos | UPE Surubim</title>
         <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/alerts.css">
         <script src="../assets/libs/js/jquery-3.5.1.min.js"></script>
         <script src="../assets/js/main.js"></script>
     </head>
@@ -127,6 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </section>
         </main>
+        <div id="<?php echo $pIndex; ?>Result"></div>
+
         <script src="../assets/js/main.js"></script>
         <script src="../assets/libs/js/jquery-3.5.1.min.js"></script>
 
@@ -145,6 +157,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         processData: false,
                         success: function(response) {
                             console.log(response);
+
+                            if (response == 200 || response == '200') {
+
+                                $("#<?php echo $pIndex ?>Result").html('<div class="status-top-right text-center" id="status-container"><div class="status status-' + 'success' + '"><div class="status-message"><span class="fa fa-check-circle"></span>' + 'Artigo cadastrado com sucesso!' + '</div></div></div>');
+                                $('#insertArticleForm').reset();
+                                // Esconde a mensagem após 2 segundos
+                                setTimeout(() => {
+                                    $("#<?php echo $pIndex ?>Result").html('');
+                                }, 4000);
+                            } else {
+                                $("#<?php echo $pIndex ?>Result").html('<div class="status-top-right text-center" id="status-container"><div class="status status-' + 'success' + '"><div class="status-message"><span class="fa fa-check-circle"></span>' + 'Houve algum problema :(. Artigo não cadastrado.' + '</div></div></div>');
+
+                                // Esconde a mensagem após 2 segundos
+                                setTimeout(() => {
+                                    $("#<?php echo $pIndex ?>Result").html('');
+                                    // window.location.href = '<?php //echo $message['redirect']; ?>';
+                                }, 4000);
+                            }
+
                         },
                         error: function(error) {
                             console.error("Erro na requisição AJAX: " + error.statusText);

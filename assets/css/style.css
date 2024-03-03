@@ -382,6 +382,7 @@ nav {
 
 .img_item_list {
     width: 100%;
+    max-height: 150px;
     border-radius: 4px;
     object-fit: cover;
 }
