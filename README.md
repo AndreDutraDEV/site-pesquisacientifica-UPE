@@ -1,4 +1,4 @@
-# Projeto Biblioteca Cinetífica - UPE Campus Surubim
+# Projeto Biblioteca Científica - UPE Campus Surubim
 
 Este repositório contém o código-fonte e os arquivos relacionados ao site desenvolvido como parte do projeto da disciplina de Escrita Científica, no curso de Sistemas de Informação da Universidade de Pernambuco (UPE), Campus Surubim.
 
